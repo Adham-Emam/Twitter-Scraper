@@ -6,15 +6,15 @@ import time
 
 TWITTER_ACCOUNTS = [
     "https://twitter.com/Mr_Derivatives",
-    # "https://twitter.com/warrior_0719",
-    # "https://twitter.com/ChartingProdigy",
-    # "https://twitter.com/allstarcharts",
-    # "https://twitter.com/yuriymatso",
-    # "https://twitter.com/TriggerTrades",
-    # "https://twitter.com/AdamMancini4",
-    # "https://twitter.com/CordovaTrades",
-    # "https://twitter.com/Barchart",
-    # "https://twitter.com/RoyLMattox"
+    "https://twitter.com/warrior_0719",
+    "https://twitter.com/ChartingProdigy",
+    "https://twitter.com/allstarcharts",
+    "https://twitter.com/yuriymatso",
+    "https://twitter.com/TriggerTrades",
+    "https://twitter.com/AdamMancini4",
+    "https://twitter.com/CordovaTrades",
+    "https://twitter.com/Barchart",
+    "https://twitter.com/RoyLMattox"
 ]
 TICKER = "$TSLA"
 INTERVAL = 15  # Time interval in minutes
@@ -31,13 +31,14 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 # Set up the selenium driver
 driver = webdriver.Chrome(options=chrome_options)
 
+
 def scrape_mentions(account, ticker):
     driver.get(account)
     time.sleep(3)  # Let the page load
 
     # Scroll down to load more tweets
     body = driver.find_element(By.TAG_NAME, "body")
-    for _ in range(10): # Range controls how many scrolls
+    for _ in range(10):  # Range controls how many scrolls
         body.send_keys(Keys.PAGE_DOWN)
         time.sleep(0.5)
 
@@ -48,12 +49,15 @@ def scrape_mentions(account, ticker):
 
     return count
 
+
 def main(twitter_accounts, ticker, interval):
-    total_mentions = sum(scrape_mentions(account, TICKER) for account in TWITTER_ACCOUNTS)
+    total_mentions = sum(scrape_mentions(account, TICKER)
+                         for account in TWITTER_ACCOUNTS)
     print(f"'{TICKER}' was mentioned '{total_mentions}' times in the last '{INTERVAL}' minutes.")
 
     # Re-run the script at the specified interval
     time.sleep(INTERVAL * 60)
+
 
 try:
     while True:
