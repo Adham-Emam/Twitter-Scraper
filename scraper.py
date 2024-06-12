@@ -20,7 +20,7 @@ TICKER = "$TSLA"
 INTERVAL = 15  # Time interval in minutes
 
 
-# Set up headless mode
+
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
@@ -38,7 +38,8 @@ def scrape_mentions(account, ticker):
 
     # Scroll down to load more tweets
     body = driver.find_element(By.TAG_NAME, "body")
-    for _ in range(10):  # Range controls how many scrolls
+    # Range controls how many scrolls
+    for _ in range(10):
         body.send_keys(Keys.PAGE_DOWN)
         time.sleep(0.5)
 
